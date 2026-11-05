@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staff Dashboard</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; align-items: stretch; min-height: 1040px; background: #F4F6FB; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #111827">
+
+<div style="flex: 1 1 260px; max-width: 100%; background: #FFFFFF; border-right: 1px solid #E3E7F0">
+<dc-import name="Sidebar" active="0" hint-size="100%,1100px"></dc-import>
+</div>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; gap: 24px">
+
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.02em; color: #111827">Good Morning, Teacher!</h1>
+<span style="font-size: 15px; font-weight: 500; color: #5B6475">Saturday, 31 October 2026</span>
+</div>
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px; background: #E3F5EC; color: #11623A; font-size: 13px; font-weight: 700"><span style="width: 8px; height: 8px; border-radius: 50%; background: #1A9A5B"></span>Online</span>
+<div style="width: 44px; height: 44px; border-radius: 50%; background: #DDE5FF; color: #1D3FB8; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px">T</div>
+</div>
+</header>
+
+<h2 style="margin: 0; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #5B6475">Overview</h2>
+
+<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px">
+<sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
+<div style="background: #FFFFFF; border: 1px solid #E3E7F0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 40px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: {{s.color}}">{{s.value}}</span>
+<span style="font-size: 14px; font-weight: 600; color: #5B6475">{{s.label}}</span>
+</div>
+</sc-for>
+</section>
+
+<h2 style="margin: 0; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #5B6475">Today</h2>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+
+<section style="flex: 2 1 420px; min-width: 0; background: #FFFFFF; border: 1px solid #E3E7F0; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800; color: #111827">Today's Timetable</h2>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{periods}}" as="p" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; border-radius: 12px; background: #F4F6FB">
+<div style="width: 6px; align-self: stretch; border-radius: 3px; background: {{p.bar}}"></div>
+<div style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 16px; font-weight: 700; color: #111827">{{p.title}}</span>
+<span style="font-size: 14px; font-weight: 500; color: #5B6475">{{p.cls}}</span>
+</div>
+<span style="font-size: 14px; font-weight: 700; color: #1D3FB8; background: #EAF0FF; padding: 8px 12px; border-radius: 8px">{{p.time}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+
+<section style="background: #FFFFFF; border: 1px solid #E3E7F0; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800; color: #111827">Attendance Status</h2>
+<span style="font-size: 14px; font-weight: 500; color: #5B6475">[Marked / not yet marked today]</span>
+<button style="height: 44px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font-size: 14px; font-weight: 700; cursor: pointer">Mark attendance</button>
+</section>
+
+<section style="background: #FFFFFF; border: 1px solid #E3E7F0; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800; color: #111827">Important Announcements</h2>
+<div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 14px; border-bottom: 1px solid #E3E7F0">
+<span style="font-size: 14px; font-weight: 700; color: #111827">[Announcement title]</span>
+<span style="font-size: 13px; font-weight: 500; color: #5B6475">[Sender · date]</span>
+</div>
+<h2 style="margin: 4px 0 0; font-size: 18px; font-weight: 800; color: #111827">Upcoming Events</h2>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 14px; font-weight: 700; color: #111827">[Event name]</span>
+<span style="font-size: 13px; font-weight: 500; color: #5B6475">[Date · duty allocation]</span>
+</div>
+</section>
+
+</div>
+</div>
+
+<h2 style="margin: 0; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #5B6475">Shortcuts &amp; Tools</h2>
+
+<section style="background: #FFFFFF; border: 1px solid #E3E7F0; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800; color: #111827">Quick Actions</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px">
+<sc-for list="{{actions}}" as="a" hint-placeholder-count="6">
+<a href="{{a.href}}" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 96px; border: 1px solid #D5DCF0; border-radius: 14px; background: #F8FAFF; color: #1D3FB8; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{a.d}}"></path></svg>
+<span>{{a.label}}</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section style="background: #14213D; border-radius: 16px; padding: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 18px; font-weight: 800; color: #FFFFFF">AI Lesson-Plan Assistant</span>
+<span style="font-size: 14px; font-weight: 500; color: #C9D3EC">Draft lesson plans and track syllabus completion for your classes.</span>
+</div>
+<button style="height: 44px; padding: 0 20px; border: 0; border-radius: 10px; background: #FFFFFF; color: #14213D; font-size: 14px; font-weight: 700; cursor: pointer">Open assistant</button>
+</section>
+
+<span style="font-size: 12px; font-weight: 500; color: #5B6475">Illustrative dashboard concept, not live school data.</span>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2F5BEA","options":["#2F5BEA","#0F766E","#7C3AED","#C2410C"]}}'>
+class Component extends DCLogic {
+renderVals() {
+const accent = this.props.accent ?? '#2F5BEA';
+const names = [
+['Staff Dashboard','M3 3h8v8H3z M13 3h8v5h-8z M13 10h8v11h-8z M3 13h8v8H3z'],
+['Attendance Management','M4 5h16v15H4z M4 9h16 M8 3v4 M16 3v4 M9 14l2 2 4-4'],
+['Academic Management','M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2z M4 19V5'],
+['Student Management','M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M3 20c0-3 3-5 6-5s6 2 6 5 M17 6a3 3 0 0 1 0 5 M18 15c2 .5 3 2 3 5'],
+['Examination & Results','M6 3h9l4 4v14H6z M14 3v5h5 M9 14l2 2 4-4'],
+['Homework & Assignments','M4 20l1-5L16 4l4 4L9 19z M14 6l4 4'],
+['Communication Centre','M4 5h16v11H9l-5 4z'],
+['Task Management','M9 6h11 M9 12h11 M9 18h11 M4 6l1 1 2-2 M4 12l1 1 2-2 M4 18l1 1 2-2'],
+['Leave & Permission','M3 12h14 M12 6l6 6-6 6 M20 4v16'],
+['Staff Development','M3 17l6-6 4 4 8-8 M15 7h6v6'],
+['Resources & Library','M4 4h4v16H4z M10 4h4v16h-4z M16 6l4 1-3 13-4-1z'],
+['Payroll & Benefits','M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M3 7l3-3h11 M16 14h3'],
+['Events & Activities','M5 21V4 M5 4h12l-2 4 2 4H5'],
+['Staff Support Centre','M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z'],
+['Profile & Settings','M4 7h10 M18 7h2 M4 17h2 M10 17h10 M16 5v4 M8 15v4']
+];
+return {
+accent,
+groups: [
+{ title: 'Main', ids: [0, 1, 8] },
+{ title: 'Teaching', ids: [2, 3, 4, 5] },
+{ title: 'Work & Communication', ids: [6, 7, 12] },
+{ title: 'Growth & Resources', ids: [9, 10] },
+{ title: 'Admin & Support', ids: [11, 13, 14] }
+].map((g) => ({
+title: g.title,
+items: g.ids.map((i) => ({
+label: names[i][0],
+d: names[i][1],
+bg: i === 0 ? '#EAF0FF' : 'transparent',
+color: i === 0 ? '#1D3FB8' : '#3B4558'
+}))
+})),
+stats: [
+{ value: '5', label: "Today's Classes", color: '#1D3FB8' },
+{ value: '3', label: 'Pending Tasks', color: '#B45309' },
+{ value: '120', label: 'Assigned Students', color: '#11623A' },
+{ value: '2', label: 'Pending Approvals', color: '#6D28D9' }
+],
+periods: [
+{ title: 'Economics', cls: 'Class 12 – A', time: '09:00 – 09:45', bar: accent },
+{ title: 'Economics', cls: 'Class 11 – B', time: '10:00 – 10:45', bar: accent },
+{ title: 'Class Teacher Hour', cls: 'Class 12 – A', time: '11:00 – 11:45', bar: '#1A9A5B' }
+],
+actions: [
+{ label: 'Attendance', d: names[1][1], href: 'Attendance.dc.html' },
+{ label: 'Homework', d: names[5][1], href: 'Homework.dc.html' },
+{ label: 'Enter Marks', d: names[4][1], href: 'Exams.dc.html' },
+{ label: 'Apply Leave', d: names[8][1], href: 'Leave.dc.html' },
+{ label: 'Messages', d: names[6][1], href: 'Communication.dc.html' },
+{ label: 'My Tasks', d: names[7][1], href: 'Tasks.dc.html' }
+]
+};
+}
+}
+</script>
+</body>
+</html>
